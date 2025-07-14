@@ -1,0 +1,36 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+env/
+venv/
+*.env
+.idea/ # For PyCharm users
+.vscode/ # For VS Code users
+*.swp
+*~
+*.log
+*.pot
+*.egg-info/
+.env
+.DS_Store # macOS specific
+
+# Database
+db.sqlite3
+
+# Media and Static Files (if served locally in dev)
+/media/
+/static/
+
+# Development specific files
+*.sqlite3
+
+# IDE specific files
+.vscode/
+.idea/
+__pycache__/
+
+# For Django specific settings
+VividComm/local_settings.py
