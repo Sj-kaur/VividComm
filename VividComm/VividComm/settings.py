@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-)e6#760rh@oc^tzepz-u*+a&3%=_vrhe=3-$q(nhiaap^k0m*5
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost']
 
 
 # Application definition
@@ -37,6 +37,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'VividComm',
+    'rest_framework',
+    'channels',
+    'users',
 ]
 
 MIDDLEWARE = [
@@ -66,7 +70,17 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'VividComm.wsgi.application'
+# WSGI_APPLICATION = 'VividComm.wsgi.application'
+ASGI_APPLICATION = 'VividComm.asgi.application'
+
+CHANNEL_LAYERS = {
+    "default": {
+        "BACKEND": "channels_redis.core.RedisChannelLayer",
+        "CONFIG": {
+            "hosts": [("127.0.0.1", 6379)], # Default Redis host and port
+        },
+    },
+}
 
 
 # Database
