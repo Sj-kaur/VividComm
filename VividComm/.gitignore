@@ -7,7 +7,6 @@ __pycache__/
 env/
 venv/
 *.env
-.idea/ # For PyCharm users
 .vscode/ # For VS Code users
 *.swp
 *~
@@ -15,7 +14,7 @@ venv/
 *.pot
 *.egg-info/
 .env
-.DS_Store # macOS specific
+
 
 # Database
 db.sqlite3
@@ -34,3 +33,7 @@ __pycache__/
 
 # For Django specific settings
 VividComm/local_settings.py
+
+# IDE and OS files
+.vscode/ # If you want to ignore VS Code settings (optional, depends on preference)
+Thumbs.db # Windows specific
