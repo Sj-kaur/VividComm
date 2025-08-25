@@ -1,19 +1,25 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin # Import UserAdmin
 from .models import CustomUser
+from rest_framework.authtoken.admin import TokenAdmin
 
-# Optional: Customize the admin display for CustomUser if needed
-# class CustomUserAdmin(UserAdmin):
-#     model = CustomUser
-#     list_display = ['username', 'email', 'phone_number', 'is_staff']
-#     fieldsets = UserAdmin.fieldsets + (
-#         (None, {'fields': ('phone_number', 'profile_picture', 'bio')}),
-#     )
-#     add_fieldsets = UserAdmin.add_fieldsets + (
-#         (None, {'fields': ('phone_number', 'profile_picture', 'bio')}),
-#     )
+class CustomUserAdmin(UserAdmin):
+    # The fields to display in the list view of the admin panel
+    list_display = UserAdmin.list_display + ('phone_number', 'bio', 'profile_picture')
 
-# Register your custom user model with the admin site
-# Use the default UserAdmin or your custom one
-admin.site.register(CustomUser)
-# If you made CustomUserAdmin above, use: admin.site.register(CustomUser, CustomUserAdmin)
+    # The fields to show in the detailed user view when you click on a user
+    fieldsets = UserAdmin.fieldsets + (
+        ('Extra Fields', {'fields': ('phone_number', 'bio', 'profile_picture')}),
+    )
+
+    # The fields to show in the "add user" page in the admin panel
+    add_fieldsets = UserAdmin.add_fieldsets + (
+        (None, {'fields': ('phone_number', 'bio', 'profile_picture')}),
+    )
+
+# Re-register the CustomUser model with our new custom admin class
+admin.site.register(CustomUser, CustomUserAdmin)
+
+# Register the Token model in the admin for easy management
+from rest_framework.authtoken.models import Token
+admin.site.register(Token, TokenAdmin)

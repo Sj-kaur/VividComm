@@ -3,6 +3,9 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework.authtoken.models import Token # For Token Authentication
 from django.contrib.auth import authenticate, login, logout # Import logout too
+from .serializers import UserSerializer, LoginSerializer, UserProfileSerializer
+from .models import CustomUser
+
 
 from .serializers import UserSerializer, LoginSerializer
 from .models import CustomUser # Ensure CustomUser is imported
@@ -58,3 +61,12 @@ class LogoutView(APIView):
         if hasattr(request.user, 'auth_token'):
             request.user.auth_token.delete()
         return Response({'message': 'Successfully logged out.'}, status=status.HTTP_200_OK)
+    
+class UserProfileView(generics.RetrieveUpdateAPIView):
+    queryset = CustomUser.objects.all()
+    serializer_class = UserProfileSerializer
+    permission_classes = [permissions.IsAuthenticated]
+
+    def get_object(self):
+        # This ensures that a user can only view/update their own profile
+        return self.request.user

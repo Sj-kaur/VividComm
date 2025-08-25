@@ -24,3 +24,9 @@ class UserSerializer(serializers.ModelSerializer):
 class LoginSerializer(serializers.Serializer):
     username = serializers.CharField()
     password = serializers.CharField(write_only=True)
+
+class UserProfileSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = CustomUser
+        fields = ['id', 'username', 'email', 'phone_number', 'profile_picture', 'bio', 'date_joined']
+        read_only_fields = ['username', 'email', 'date_joined']
