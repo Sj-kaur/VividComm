@@ -1,6 +1,8 @@
+// src/App.js
 import React, { useState } from 'react';
 import Registration from './Registration';
 import Login from './Login';
+import ContactList from './ContactList';
 import './App.css';
 
 function App() {
@@ -10,10 +12,7 @@ function App() {
     <div className="App">
       <h1>VividComm Chat App</h1>
       {token ? (
-        <div>
-          <p>You are logged in!</p>
-          {/* Here you would add a Logout button and other protected content */}
-        </div>
+        <ContactList token={token} />
       ) : (
         <>
           <Registration />

@@ -3,7 +3,7 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework.authtoken.models import Token # For Token Authentication
 from django.contrib.auth import authenticate, login, logout # Import logout too
-from .serializers import UserSerializer, LoginSerializer, UserProfileSerializer
+from .serializers import UserSerializer, LoginSerializer, UserProfileSerializer, ContactSerializer
 from .models import CustomUser
 
 
@@ -70,3 +70,8 @@ class UserProfileView(generics.RetrieveUpdateAPIView):
     def get_object(self):
         # This ensures that a user can only view/update their own profile
         return self.request.user
+    
+class ContactListView(generics.ListAPIView):
+    queryset = CustomUser.objects.all()
+    serializer_class = ContactSerializer
+    permission_classes = [permissions.IsAuthenticated]

@@ -30,3 +30,8 @@ class UserProfileSerializer(serializers.ModelSerializer):
         model = CustomUser
         fields = ['id', 'username', 'email', 'phone_number', 'profile_picture', 'bio', 'date_joined']
         read_only_fields = ['username', 'email', 'date_joined']
+
+class ContactSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = CustomUser
+        fields = ['id', 'username', 'bio', 'profile_picture']
